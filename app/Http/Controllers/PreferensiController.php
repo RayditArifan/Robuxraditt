@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
 
 class PreferensiController extends Controller
 {
     public function index(Request $request)
     {
         $username = auth()->user()->name;
-        $tema = $request->cookie('tema', 'light');
-        $ukuranFont = $request->cookie('ukuran_font', 'normal');
+        $tema = session('tema', 'light');
+        $ukuranFont = session('ukuran_font', 'normal');
 
         $contactFile = storage_path('app/contact.json');
         $contact = [
@@ -39,22 +38,25 @@ class PreferensiController extends Controller
             'ukuran_font' => ['required', 'in:kecil,normal,besar'],
         ]);
 
-        $cookieTema = Cookie::make('tema', $validated['tema'], 60 * 24 * 30, null, null, null, false);
-        $cookieFont = Cookie::make('ukuran_font', $validated['ukuran_font'], 60 * 24 * 30, null, null, null, false);
+        session(['tema' => $validated['tema'], 'ukuran_font' => $validated['ukuran_font']]);
 
         return response()->json([
             'success' => true,
             'message' => 'Preferensi berhasil disimpan.',
-            'cookie_sebelumnya' => [
-                'tema' => $request->cookie('tema', 'belum ada'),
-                'ukuran_font' => $request->cookie('ukuran_font', 'belum ada'),
-            ],
             'preferensi_baru' => [
                 'tema' => $validated['tema'],
                 'ukuran_font' => $validated['ukuran_font'],
             ],
-        ])->withCookie($cookieTema)
-          ->withCookie($cookieFont);
+        ]);
+    }
+
+    public function toggleTema(Request $request): JsonResponse
+    {
+        $current = session('tema', 'light');
+        $newTema = ($current === 'dark') ? 'light' : 'dark';
+        session(['tema' => $newTema]);
+
+        return response()->json(['success' => true, 'tema' => $newTema]);
     }
 
     public function simpanKontak(Request $request): JsonResponse

@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HalController;
 use App\Http\Controllers\PreferensiController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -24,7 +25,9 @@ Route::prefix('customer')
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/profile', [HalController::class, 'showProfile'])->name('profile');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/preferensi/toggle-tema', [PreferensiController::class, 'toggleTema'])->name('preferensi.toggleTema');
 });
 
 // Dashboard customer tetap wajib login sebagai customer.

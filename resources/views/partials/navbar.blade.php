@@ -111,53 +111,34 @@
     </nav>
 </header>
 
+
 <script>
-function setCookie(name, value, days = 30) {
-    const expires = new Date();
-    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-    document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires.toUTCString()};path=/;SameSite=Lax`;
-}
-
-function getCookie(name) {
-    const cookies = document.cookie.split(';');
-
-    for (const cookie of cookies) {
-        const [key, value] = cookie.trim().split('=');
-
-        if (key === name) {
-            return decodeURIComponent(value || '');
-        }
-    }
-
-    return null;
-}
-
-function deleteCookie(name) {
-    document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/`;
-}
-
-const logoutForm = document.getElementById('logout-form');
-logoutForm?.addEventListener('submit', function () {
-    deleteCookie('tema');
-    deleteCookie('ukuran_font');
-});
-
 const toggleTema = document.getElementById('toggle-tema');
 const ikonTema = document.getElementById('ikon-tema');
 
 function updateIkonTema() {
-    if (!ikonTema) {
-        return;
-    }
-
+    if (!ikonTema) return;
     const isDark = document.documentElement.classList.contains('dark');
     ikonTema.textContent = isDark ? '☀️' : '🌙';
 }
 
-toggleTema?.addEventListener('click', function () {
+toggleTema?.addEventListener('click', async function () {
     const isDark = document.documentElement.classList.toggle('dark');
-    setCookie('tema', isDark ? 'dark' : 'light', 30);
     updateIkonTema();
+
+    try {
+        await fetch('{{ route("preferensi.toggleTema") }}', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'Accept': 'application/json',
+            },
+        });
+    } catch (e) {
+        // Revert jika gagal
+        document.documentElement.classList.toggle('dark', !isDark);
+        updateIkonTema();
+    }
 });
 
 updateIkonTema();

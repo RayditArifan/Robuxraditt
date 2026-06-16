@@ -44,14 +44,25 @@
 
   <div class="form-group">
     <label for="foto">Foto Barang</label>
-    <input type="file" id="foto" name="foto" accept="image/png, image/jpeg, image/jpg">
-    @error('foto') <small class="error-message">{{ $message }}</small> @enderror
 
     @isset($barang)
       @if ($barang->foto)
-        <small>Foto saat ini: {{ $barang->foto }}</small>
+        <div style="margin-bottom:10px;">
+          <img src="{{ asset('storage/' . $barang->foto) }}"
+               alt="Foto saat ini"
+               style="max-height:140px; max-width:240px; border-radius:10px; border:1px solid #e2e8f0; object-fit:contain; background:#f8fafc; padding:6px;">
+          <br>
+          <small style="color:#64748b;">Foto saat ini. Upload baru di bawah untuk menggantinya.</small>
+        </div>
+      @else
+        <div style="margin-bottom:8px;">
+          <small style="color:#94a3b8;">Belum ada foto. Silakan upload di bawah.</small>
+        </div>
       @endif
     @endisset
+
+    <input type="file" id="foto" name="foto" accept="image/png, image/jpeg, image/jpg">
+    @error('foto') <small class="error-message">{{ $message }}</small> @enderror
   </div>
 </div>
 

@@ -73,6 +73,13 @@
       <button type="submit" class="btn-submit">Masuk</button>
     </form>
 
+    @if (Route::has('register'))
+      <div style="text-align:center; margin-top:16px; font-size:0.9rem; color:#64748b;">
+        Belum punya akun?
+        <a href="{{ route('register') }}" style="color:#3b82f6; font-weight:600; text-decoration:none;">Daftar sekarang</a>
+      </div>
+    @endif
+
     <div class="login-hint">
       Default: <strong>admin@example.com</strong> / <strong>password</strong>
     </div>
