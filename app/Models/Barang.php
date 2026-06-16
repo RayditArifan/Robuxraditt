@@ -45,11 +45,14 @@ class Barang extends Model
         return $this->stok * $this->harga;
     }
 
-    /**
-     * Get the transactions associated with the product.
-     */
+
     public function transaksis(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Transaksi::class);
+    }
+
+    public function suppliers(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Supplier::class, 'barang_supplier', 'barang_id', 'supplier_id');
     }
 }
