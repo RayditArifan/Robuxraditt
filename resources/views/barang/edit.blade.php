@@ -6,16 +6,16 @@
 
 <section class="hero">
   <div>
-    <span class="hero-tag">Update - Edit Barang</span>
+    <span class="hero-tag">Kelola Stok • Edit Barang</span>
     <h2>Edit Barang</h2>
-    <p>Ubah data barang <strong>{{ $barang->nama }}</strong>.</p>
+    <p>Perbarui informasi barang <strong>{{ $barang->nama }}</strong>.</p>
   </div>
 </section>
 
 <section class="form-section">
   <div class="section-heading">
     <h2>Form Edit Barang</h2>
-    <p>Perubahan akan disimpan ke tabel barang setelah tombol update ditekan.</p>
+    <p>Silakan perbarui informasi barang di bawah ini secara akurat.</p>
   </div>
 
   <form action="{{ route('barang.update', $barang) }}" method="POST" enctype="multipart/form-data">

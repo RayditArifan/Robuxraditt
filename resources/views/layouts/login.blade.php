@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@yield('title', 'Login — Inventaris RobuxRadit')</title>
-  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+  <title>@yield('title', 'Login — Toko RobuxRadit')</title>
+  <meta name="description" content="Login ke sistem Toko RobuxRadit untuk mengelola data barang.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
-<body style="padding-top:0; display:flex; flex-direction:column; min-height:100vh; background: linear-gradient(135deg, #1b3a6b, #2980b9, #6b267c);">
+<body class="login-body">
 
-  <main style="flex:1; display:flex; align-items:center; justify-content:center; padding: 32px 16px;">
-    @yield('content')
-  </main>
-
-  @include('partials.footer')
+  @yield('content')
 
 </body>
 </html>

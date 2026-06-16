@@ -6,9 +6,9 @@
 
 <section class="hero">
   <div>
-    <span class="hero-tag">P1 Nomor 3 - Cookies - Dark Mode</span>
+    <span class="hero-tag">Pengaturan Tampilan</span>
     <h2>Preferensi Tampilan RobuxRadit</h2>
-    <p>Halo <strong>{{ $username }}</strong>, atur tema dan ukuran font inventaris..</p>
+    <p>Ubah preferensi tema dan ukuran font situs web agar nyaman bagi Anda.</p>
   </div>
 </section>
 

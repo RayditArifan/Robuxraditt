@@ -6,34 +6,34 @@
 
 <section class="hero">
   <div>
-    <span class="hero-tag">Tentang • Halaman Statis</span>
-    <h2>Tentang Aplikasi</h2>
+    <span class="hero-tag">Toko Game • Toko Terpercaya</span>
+    <h2>Tentang RobuxRadit</h2>
     <p>
-      Halaman ini berisi informasi tentang sistem
+      Tempat terpercaya untuk memenuhi seluruh kebutuhan game Roblox Anda, menghadirkan produk premium dengan harga paling terjangkau.
     </p>
   </div>
 </section>
 
 <section class="dashboard-section">
   <div class="section-heading">
-    <h2>Deskripsi Singkat</h2>
+    <h2>Siapa Kami?</h2>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aplikasi ini digunakan untuk menampilkan informasi umum tentang sistem yang dibuat.
+      Toko RobuxRadit didirikan untuk mempermudah pemain Roblox mendapatkan Robux, Gamepass, dan Item Game secara aman, cepat, dan terpercaya. Kami berdedikasi memberikan layanan terbaik dengan proses transaksi otomatis dan aman.
     </p>
   </div>
 
   <div class="card-grid">
     <article class="card">
-      <h3>Tujuan Aplikasi</h3>
+      <h3>Layanan Terbaik</h3>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Isi bagian ini dengan tujuan aplikasi kamu sendiri.
+        Kami berkomitmen untuk selalu menghadirkan harga bersaing dan jaminan keamanan akun bagi setiap pelanggan. Kepuasan Anda adalah prioritas utama kami.
       </p>
     </article>
 
     <article class="card">
-      <h3>Fitur Utama</h3>
+      <h3>Mengapa Memilih Kami?</h3>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Isi bagian ini dengan fitur utama aplikasi kamu sendiri.
+        Proses transaksi cepat dan responsif, dukungan konversi kurs USD-IDR real-time, pilihan produk terlengkap, serta metode pembayaran yang mudah dan aman.
       </p>
     </article>
   </div>

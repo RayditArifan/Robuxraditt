@@ -50,5 +50,7 @@ class AuthenticationTest extends TestCase
 
         $this->assertGuest();
         $response->assertRedirect('/');
+        $response->assertCookieExpired('tema');
+        $response->assertCookieExpired('ukuran_font');
     }
 }

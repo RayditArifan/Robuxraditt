@@ -45,7 +45,10 @@ class HalController extends Controller
 
     public function logout()
     {
-        return redirect()->route('login')->with('info', 'Kamu berhasil keluar.');
+        return redirect()->route('login')
+            ->with('info', 'Kamu berhasil keluar.')
+            ->withoutCookie('tema')
+            ->withoutCookie('ukuran_font');
     }
 
     public function showProfile(Request $request)

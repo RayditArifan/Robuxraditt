@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Profil — Inventaris RobuxRadit')
+@section('title', 'Profil — Toko RobuxRadit')
 
 @section('content')
 

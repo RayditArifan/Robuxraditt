@@ -1,8 +1,8 @@
 <footer class="site-footer">
   <div class="footer-grid">
     <div>
-      <h3>Inventaris RobuxRadit</h3>
-      <p>Website untuk mengatur data inventaris barang Roblox.</p>
+      <h3>Toko RobuxRadit</h3>
+      <p>Website untuk mengatur data barang Toko Roblox.</p>
     </div>
     <div>
       <h3>Tentang Pemilik</h3>

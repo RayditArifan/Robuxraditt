@@ -10,6 +10,18 @@ use Illuminate\Validation\Rule;
 class ProfileUpdateRequest extends FormRequest
 {
     /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation()
+    {
+        if ($this->has('email')) {
+            $this->merge([
+                'email' => strtolower($this->email),
+            ]);
+        }
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, ValidationRule|array<mixed>|string>
@@ -21,7 +33,6 @@ class ProfileUpdateRequest extends FormRequest
             'email' => [
                 'required',
                 'string',
-                'lowercase',
                 'email',
                 'max:255',
                 Rule::unique(User::class)->ignore($this->user()->id),

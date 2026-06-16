@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard — Inventaris RobuxRadit')
+@section('title', 'Dashboard — Toko RobuxRadit')
 
 @section('content')
 
@@ -9,14 +9,14 @@
     <span class="hero-tag">Dashboard • Statistik • Ringkasan</span>
     <h2>Selamat datang, {{ auth()->user()->name ?? $username }}! 👋</h2>
     <p>
-      Pantau statistik inventaris barang Roblox kamu dalam satu tampilan ringkas.
+      Pantau statistik toko barang Roblox kamu dalam satu tampilan ringkas.
     </p>
   </div>
 </section>
 
 <section id="dashboard" class="dashboard-section">
   <div class="section-heading">
-    <h2>Statistik Inventaris</h2>
+    <h2>Statistik Toko</h2>
     <p>Ringkasan data barang saat ini.</p>
   </div>
 
@@ -35,7 +35,7 @@
     </article>
 
     <article class="card stat-card">
-      <p class="stat-label">Total Nilai Inventaris</p>
+      <p class="stat-label">Total Nilai Toko</p>
       <h3>Rp {{ number_format($totalNilai, 0, ',', '.') }}</h3>
       <small>Stok × harga per barang</small>
     </article>
@@ -80,6 +80,8 @@
   <p><strong>Menipis</strong> berarti stok di bawah 5.</p>
 </div>
 
+@include('partials.robux-converter')
+
 <section class="quick-action-section">
   <div class="section-heading">
     <h2>Aksi Cepat</h2>
@@ -89,7 +91,7 @@
   <div class="quick-grid">
     <a href="{{ route('pengelolaan') }}" class="quick-card">
       <span class="quick-icon">📦</span>
-      <h3>Kelola Inventaris</h3>
+      <h3>Kelola Toko</h3>
       <p>Lihat dan kelola seluruh daftar barang.</p>
     </a>
 

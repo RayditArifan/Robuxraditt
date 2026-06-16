@@ -1,11 +1,15 @@
+@php
+    $cookieTema = trim(request()->cookie('tema', 'light'), '"');
+    $cookieFont = trim(request()->cookie('ukuran_font', 'normal'), '"');
+@endphp
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="{{ $cookieTema === 'dark' ? 'dark' : '' }}" data-font="{{ $cookieFont }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Inventaris RobuxRadit — Sistem Manajemen Barang">
+  <meta name="description" content="Toko RobuxRadit — Sistem Manajemen Barang">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>@yield('title', 'Inventaris RobuxRadit')</title>
+  <title>@yield('title', 'Toko RobuxRadit')</title>
   <script>
     (function () {
       function getCookie(name) {
@@ -22,8 +26,15 @@
         return null;
       }
 
-      const tema = getCookie('tema') || 'light';
-      const ukuranFont = getCookie('ukuran_font') || 'normal';
+      let tema = getCookie('tema') || 'light';
+      let ukuranFont = getCookie('ukuran_font') || 'normal';
+
+      if (tema.startsWith('"') && tema.endsWith('"')) {
+        tema = tema.slice(1, -1);
+      }
+      if (ukuranFont.startsWith('"') && ukuranFont.endsWith('"')) {
+        ukuranFont = ukuranFont.slice(1, -1);
+      }
 
       if (tema === 'dark') {
         document.documentElement.classList.add('dark');

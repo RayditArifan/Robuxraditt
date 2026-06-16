@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -28,7 +29,8 @@ class BarangController extends Controller
             'inventaris_kunjungan_terakhir' => $kunjunganTerakhir,
         ]);
 
-        $query = Barang::where('user_id', auth()->id());
+        $isAdmin = auth()->user()->role === 'admin';
+        $query = $isAdmin ? Barang::query() : Barang::where('user_id', auth()->id());
 
         $barangs = (clone $query)->latest()->paginate(10);
         $totalBarang = (clone $query)->count();
@@ -55,7 +57,8 @@ class BarangController extends Controller
     {
         $keyword = trim((string) $request->get('q', ''));
 
-        $barangs = Barang::where('user_id', auth()->id())
+        $isAdmin = auth()->user()->role === 'admin';
+        $barangs = ($isAdmin ? Barang::query() : Barang::where('user_id', auth()->id()))
             ->when($keyword !== '', function ($query) use ($keyword) {
                 $query->where(function ($query) use ($keyword) {
                     $query->where('kode', 'like', "%{$keyword}%")
@@ -218,5 +221,83 @@ class BarangController extends Controller
         if (!$isAdmin && $barang->user_id !== auth()->id()) {
             abort(403, 'Kamu tidak punya akses ke data barang ini.');
         }
+    }
+
+    /**
+     * List all transactions for admin.
+     */
+    public function transaksiList()
+    {
+        $username = auth()->user()->name;
+        $transaksis = Transaksi::with(['user', 'barang'])->latest()->paginate(10);
+        return view('admin.transaksi.index', compact('username', 'transaksis'));
+    }
+
+    /**
+     * Show a transaction detail for admin.
+     */
+    public function transaksiShow(Transaksi $transaksi)
+    {
+        $username = auth()->user()->name;
+        $transaksi->load(['user', 'barang']);
+        return view('admin.transaksi.show', compact('username', 'transaksi'));
+    }
+
+    /**
+     * Approve a pending transaction.
+     */
+    public function transaksiSetujui(Transaksi $transaksi)
+    {
+        abort_unless($transaksi->status === 'pending', 400);
+
+        $barang = $transaksi->barang;
+
+        if ($barang->stok < $transaksi->jumlah) {
+            return redirect()->back()->with('error', 'Gagal menyetujui transaksi. Stok barang tidak mencukupi.');
+        }
+
+        // Deduct stock
+        $barang->stok -= $transaksi->jumlah;
+        $barang->save();
+
+        // Update status
+        $transaksi->status = 'proses';
+        $transaksi->save();
+
+        return redirect()->back()->with('success', 'Pembayaran transaksi disetujui. Status berubah menjadi Diproses.');
+    }
+
+    /**
+     * Complete a transaction.
+     */
+    public function transaksiSelesaikan(Transaksi $transaksi)
+    {
+        abort_unless($transaksi->status === 'proses', 400);
+
+        // Update status
+        $transaksi->status = 'selesai';
+        $transaksi->save();
+
+        return redirect()->back()->with('success', 'Transaksi berhasil diselesaikan.');
+    }
+
+    /**
+     * Reject a pending transaction.
+     */
+    public function transaksiTolak(Transaksi $transaksi)
+    {
+        abort_unless($transaksi->status === 'pending', 400);
+
+        // Delete proof of payment file
+        if ($transaksi->bukti_pembayaran) {
+            Storage::disk('public')->delete($transaksi->bukti_pembayaran);
+            $transaksi->bukti_pembayaran = null;
+        }
+
+        // Revert status
+        $transaksi->status = 'belum_bayar';
+        $transaksi->save();
+
+        return redirect()->back()->with('success', 'Transaksi ditolak dan status dikembalikan ke Menunggu Pembayaran.');
     }
 }

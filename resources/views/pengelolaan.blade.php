@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Pengelolaan Inventaris - RobuxRadit')
+@section('title', 'Pengelolaan Toko - RobuxRadit')
 
 @section('content')
 
 <section class="hero">
   <div>
-    <span class="hero-tag">Pengelolaan - CRUD Barang - Stok</span>
-    <h2>Pengelolaan Inventaris</h2>
+    <span class="hero-tag">Pengelolaan Stok</span>
+    <h2>Pengelolaan Toko</h2>
     <p>Halo <strong>{{ $username }}</strong>, di halaman ini kamu bisa menambah, melihat detail, mengubah, dan menghapus barang.</p>
   </div>
 </section>
@@ -33,7 +33,7 @@
       <small>Seluruh unit</small>
     </article>
     <article class="card stat-card">
-      <p class="stat-label">Nilai Inventaris</p>
+      <p class="stat-label">Nilai Toko</p>
       <h3 class="money-text">Rp {{ number_format($totalNilai, 0, ',', '.') }}</h3>
       <small>Stok x harga</small>
     </article>
@@ -45,6 +45,7 @@
   </div>
 </section>
 
+@include('partials.robux-converter')
 
 <section class="dashboard-section ajax-section">
   <div class="section-heading">
@@ -119,26 +120,26 @@
 
 <section class="dashboard-section session-section">
   <div class="section-heading">
-    <h2>Aktivitas Kunjungan Inventaris</h2>
+    <h2>Aktivitas Kunjungan Toko</h2>
   </div>
 
   <div class="visit-grid">
     <article class="visit-card">
       <span>Total Kunjungan</span>
       <strong id="visit-jumlah">{{ $jumlahKunjungan }}</strong>
-      <small>kali membuka halaman pengelolaan</small>
+      <small>kali membuka halaman panel admin</small>
     </article>
 
     <article class="visit-card">
       <span>Kunjungan Pertama</span>
       <strong id="visit-pertama">{{ $kunjunganPertama }}</strong>
-      <small>disimpan di session server</small>
+      <small>tercatat di sistem server</small>
     </article>
 
     <article class="visit-card">
       <span>Kunjungan Terakhir</span>
       <strong id="visit-terakhir">{{ $kunjunganTerakhir }}</strong>
-      <small>diperbarui setiap halaman dibuka</small>
+      <small>diperbarui secara berkala</small>
     </article>
   </div>
 
@@ -148,8 +149,8 @@
 
 <section id="inventaris-section" class="table-section">
   <div class="section-heading">
-    <h2>Daftar Inventaris Barang</h2>
-    <p>Data berikut berasal dari tabel <code>barangs</code> melalui Model Barang.</p>
+    <h2>Daftar Barang Toko</h2>
+    <p>Kelola semua daftar barang toko secara real-time.</p>
   </div>
 
   <div class="table-wrapper">
@@ -371,7 +372,7 @@
   const resetKunjunganMessage = document.getElementById('reset-kunjungan-message');
 
   resetKunjunganBtn?.addEventListener('click', async function () {
-    if (!confirm('Reset hitungan kunjungan inventaris?')) {
+    if (!confirm('Reset hitungan kunjungan toko?')) {
       return;
     }
 
