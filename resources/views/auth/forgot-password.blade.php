@@ -1,25 +1,56 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+@extends('layouts.login')
+
+@section('title', 'Lupa Password — Toko RobuxRadit')
+
+@section('content')
+<div class="login-container">
+  <div class="login-card">
+
+    <div class="login-header">
+      <div class="login-logo">
+        <img src="{{ asset('images/Logo Robux.jpg') }}" alt="Logo RobuxRadit" onerror="this.parentElement.innerHTML='<span>R</span>'">
+      </div>
+      <h2>Toko RobuxRadit</h2>
+      <p>Masukkan email Anda untuk menerima tautan reset password</p>
     </div>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    @if (session('status'))
+      <div class="alert alert-success">
+        {{ session('status') }}
+      </div>
+    @endif
 
-    <form method="POST" action="{{ route('password.email') }}">
-        @csrf
+    @if ($errors->any())
+      <div class="alert alert-danger">
+        {{ $errors->first() }}
+      </div>
+    @endif
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+    <form method="POST" action="{{ route('password.email') }}" class="login-form">
+      @csrf
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value="{{ old('email') }}"
+          placeholder="Masukkan email Anda"
+          required
+          autofocus
+          autocomplete="email"
+        >
+      </div>
+
+      <button type="submit" class="btn-submit">Kirim Tautan Reset Password</button>
     </form>
-</x-guest-layout>
+
+    <div style="text-align:center; margin-top:16px; font-size:0.9rem; color:#64748b;">
+      Ingat password Anda?
+      <a href="{{ route('login') }}" style="color:#3b82f6; font-weight:600; text-decoration:none;">Kembali Masuk</a>
+    </div>
+
+  </div>
+</div>
+@endsection
