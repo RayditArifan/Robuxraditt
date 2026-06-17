@@ -50,9 +50,4 @@ class Barang extends Model
     {
         return $this->hasMany(Transaksi::class);
     }
-
-    public function suppliers(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(Supplier::class, 'barang_supplier', 'barang_id', 'supplier_id');
-    }
 }
