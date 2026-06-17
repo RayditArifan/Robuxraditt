@@ -64,10 +64,6 @@
           <span class="checkbox-box"></span>
           Ingat saya
         </label>
-
-        @if (Route::has('password.request'))
-          <a href="{{ route('password.request') }}" class="forgot-password">Lupa password?</a>
-        @endif
       </div>
 
       <button type="submit" class="btn-submit">Masuk</button>
