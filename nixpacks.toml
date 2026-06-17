@@ -15,5 +15,9 @@ cmds = [
   "php artisan view:cache"
 ]
 
-[start]
-cmd = "php artisan migrate --seed --force && php artisan storage:link --force && php artisan serve --host=0.0.0.0 --port=$PORT"
+[phases.postbuild]
+cmds = [
+  "php artisan migrate --seed --force",
+  "php artisan storage:link --force"
+]
+dependsOn = ["build"]
