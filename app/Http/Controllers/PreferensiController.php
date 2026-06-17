@@ -16,7 +16,6 @@ class PreferensiController extends Controller
         $contactFile = storage_path('app/contact.json');
         $contact = [
             'email' => 'support@robuxradit.com',
-            'whatsapp' => '628257511930',
             'phone' => '+62 825-7511-930',
             'address' => 'Jakarta, Indonesia (Operasional Online)',
             'hours' => 'Layanan pelanggan kami aktif setiap hari mulai pukul 08:00 hingga 22:00 WIB. Pertanyaan di luar jam kerja tetap akan kami tampung dan kami balas sesegera mungkin pada hari berikutnya.'
@@ -63,7 +62,6 @@ class PreferensiController extends Controller
     {
         $validated = $request->validate([
             'email' => ['required', 'email', 'max:255'],
-            'whatsapp' => ['required', 'string', 'max:50'],
             'phone' => ['required', 'string', 'max:50'],
             'address' => ['required', 'string', 'max:500'],
             'hours' => ['required', 'string', 'max:1000'],

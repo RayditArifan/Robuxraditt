@@ -75,10 +75,10 @@
                     $gopayNumber = '628257511930';
                     if (file_exists($contactFile)) {
                         $savedContact = json_decode(file_get_contents($contactFile), true);
-                        if (!empty($savedContact['whatsapp'])) {
-                            $gopayNumber = $savedContact['whatsapp'];
-                        } elseif (!empty($savedContact['phone'])) {
+                        if (!empty($savedContact['phone'])) {
                             $gopayNumber = $savedContact['phone'];
+                        } elseif (!empty($savedContact['whatsapp'])) {
+                            $gopayNumber = $savedContact['whatsapp'];
                         }
                     }
                 @endphp

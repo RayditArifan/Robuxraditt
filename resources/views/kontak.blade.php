@@ -8,7 +8,6 @@
   $contactFile = storage_path('app/contact.json');
   $contact = [
       'email' => 'support@robuxradit.com',
-      'whatsapp' => '628257511930',
       'phone' => '+62 825-7511-930',
       'address' => 'Jakarta, Indonesia (Operasional Online)',
       'hours' => 'Layanan pelanggan kami aktif setiap hari mulai pukul 08:00 hingga 22:00 WIB. Pertanyaan di luar jam kerja tetap akan kami tampung dan kami balas sesegera mungkin pada hari berikutnya.'
@@ -18,6 +17,12 @@
       if (is_array($savedContact)) {
           $contact = array_merge($contact, $savedContact);
       }
+  }
+
+  // Clean phone to generate whatsapp link
+  $cleanPhone = preg_replace('/[^0-9]/', '', $contact['phone']);
+  if (str_starts_with($cleanPhone, '0')) {
+      $cleanPhone = '62' . substr($cleanPhone, 1);
   }
 @endphp
 
@@ -49,7 +54,7 @@
         <tr>
           <th>WhatsApp</th>
           <td>
-            <a id="view-whatsapp-link" href="https://wa.me/{{ $contact['whatsapp'] }}" target="_blank" rel="noopener noreferrer" style="color: #25d366; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+            <a id="view-whatsapp-link" href="https://wa.me/{{ $cleanPhone }}" target="_blank" rel="noopener noreferrer" style="color: #25d366; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
               Chat WhatsApp (<span id="view-phone">{{ $contact['phone'] }}</span>)
             </a>
@@ -90,12 +95,7 @@
       </div>
 
       <div class="form-group" style="margin-bottom: 15px;">
-        <label for="whatsapp" style="display: block; font-weight: 600; margin-bottom: 6px;">No. WhatsApp (Hanya angka, contoh: 628257511930)</label>
-        <input type="text" id="whatsapp" name="whatsapp" value="{{ $contact['whatsapp'] }}" required style="padding: 10px; border-radius: 8px; border: 1.5px solid var(--border); width: 100%; max-width: 400px; background: var(--bg); color: var(--text);">
-      </div>
-
-      <div class="form-group" style="margin-bottom: 15px;">
-        <label for="phone" style="display: block; font-weight: 600; margin-bottom: 6px;">No. Telepon / Teks Tampilan WhatsApp (Contoh: +62 825-7511-930)</label>
+        <label for="phone" style="display: block; font-weight: 600; margin-bottom: 6px;">No. Telepon / WhatsApp (Contoh: +62 825-7511-930 atau 0825-7511-930)</label>
         <input type="text" id="phone" name="phone" value="{{ $contact['phone'] }}" required style="padding: 10px; border-radius: 8px; border: 1.5px solid var(--border); width: 100%; max-width: 400px; background: var(--bg); color: var(--text);">
       </div>
 
@@ -150,7 +150,11 @@
 
         // Live update the view-only preview cards immediately
         document.getElementById('view-email').textContent = payload.email;
-        document.getElementById('view-whatsapp-link').href = `https://wa.me/${payload.whatsapp}`;
+        let cleanPhone = payload.phone.replace(/[^0-9]/g, '');
+        if (cleanPhone.startsWith('0')) {
+          cleanPhone = '62' + cleanPhone.slice(1);
+        }
+        document.getElementById('view-whatsapp-link').href = `https://wa.me/${cleanPhone}`;
         document.getElementById('view-phone').textContent = payload.phone;
         document.getElementById('view-phone-alt').textContent = payload.phone;
         document.getElementById('view-address').textContent = payload.address;
