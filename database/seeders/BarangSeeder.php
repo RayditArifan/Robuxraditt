@@ -10,10 +10,10 @@ class BarangSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            ['kode' => 'BRG-001', 'nama' => 'Gamepass VIP Roblox', 'kategori' => 'Gamepass', 'stok' => 12, 'harga' => 35000, 'tanggal_masuk' => '2026-05-01', 'aktif' => true],
-            ['kode' => 'BRG-002', 'nama' => 'Voucher Robux 100', 'kategori' => 'Voucher', 'stok' => 20, 'harga' => 25000, 'tanggal_masuk' => '2026-05-01', 'aktif' => true],
+            ['kode' => 'BRG-001', 'nama' => 'Gamepass VIP Roblox', 'kategori' => 'Gamepass', 'stok' => 12, 'harga' => 35000, 'tanggal_masuk' => '2026-05-01', 'aktif' => true, 'foto' => 'barang/GCF0Trb79CDeGOEcenqK9aASCnk6Am8xcrLRApAE.jpg'],
+            ['kode' => 'BRG-002', 'nama' => 'Voucher Robux 100', 'kategori' => 'Voucher', 'stok' => 20, 'harga' => 25000, 'tanggal_masuk' => '2026-05-01', 'aktif' => true, 'foto' => 'barang/3cA688w18qfaIIap8jBx26rt3rca7pFW9XTtaNaY.jpg'],
             ['kode' => 'BRG-003', 'nama' => 'Private Server Bulanan', 'kategori' => 'Private Server', 'stok' => 4, 'harga' => 15000, 'tanggal_masuk' => '2026-05-02', 'aktif' => true],
-            ['kode' => 'BRG-004', 'nama' => 'Gamepass Premium', 'kategori' => 'Gamepass', 'stok' => 7, 'harga' => 50000, 'tanggal_masuk' => '2026-05-02', 'aktif' => true],
+            ['kode' => 'BRG-004', 'nama' => 'Gamepass Dandys Stary Night', 'kategori' => 'Gamepass', 'stok' => 7, 'harga' => 50000, 'tanggal_masuk' => '2026-05-02', 'aktif' => true, 'foto' => 'barang/0UATSDQdkd0iVzH4fpSqslmjIM9Jk3Zo5ZO1fe7H.png'],
             ['kode' => 'BRG-005', 'nama' => 'Voucher Robux 500', 'kategori' => 'Voucher', 'stok' => 3, 'harga' => 110000, 'tanggal_masuk' => '2026-05-03', 'aktif' => true],
             ['kode' => 'BRG-006', 'nama' => 'Private Server Mingguan', 'kategori' => 'Private Server', 'stok' => 9, 'harga' => 8000, 'tanggal_masuk' => '2026-05-03', 'aktif' => true],
             ['kode' => 'BRG-007', 'nama' => 'Gamepass Starter', 'kategori' => 'Gamepass', 'stok' => 2, 'harga' => 12000, 'tanggal_masuk' => '2026-05-04', 'aktif' => true],
