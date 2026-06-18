@@ -1,58 +1,109 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎮 RobuxRadit — Sistem Manajemen & Toko Roblox Digital
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+RobuxRadit adalah aplikasi web dinamis berbasis **Laravel 11** dan **SQLite** yang dirancang sebagai platform e-commerce dan sistem manajemen inventaris (CRUD) untuk barang digital Roblox (seperti Gamepass, Voucher Robux, dan Private Server). 
 
-## About Laravel
+Proyek ini dibangun untuk memenuhi seluruh kriteria penilaian mata kuliah Pemrograman Berbasis Web (kecuali modul testing).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Fitur Utama Aplikasi
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 1. Frontend & UI/UX Responsif (HTML5 & CSS3)
+*   Menggunakan elemen **HTML5 semantik** (`<section>`, `<article>`, `<main>`, `<header>`, `<nav>`, dll.) untuk struktur yang bersih dan SEO-friendly.
+*   **CSS Kustom Variabel & Flexbox/Grid** untuk tata letak modern dan responsif yang menyesuaikan ukuran layar (Mobile, Tablet, Desktop).
+*   **Dua Pilihan Tema** (Light Mode / Dark Mode) & Ukuran Font (Kecil, Normal, Besar) yang disimpan secara dinamis.
 
-## Learning Laravel
+### 2. Interaktivitas JavaScript (DOM & Klien Sisi Validasi)
+*   **Validasi Formulir Sisi Klien** di form Tambah Barang (dengan visual error, scroll otomatis ke error pertama, dan penanda sukses).
+*   **Manipulasi DOM Dinamis** untuk merender tabel inventaris, menyembunyikan/menampilkan password, serta memperbarui kalkulator konversi Robux.
+*   **Konfirmasi Interaktif** menggunakan dialog konfirmasi sebelum menghapus data barang.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 3. Backend PHP & CRUD Database Relasional (Laravel Eloquent)
+*   **Autentikasi Pengguna & Role**: Pembagian akses untuk **Admin** (Mengelola Inventaris & Verifikasi Transaksi) dan **Customer** (Melihat Katalog & Membeli/Checkout).
+*   **CRUD Lengkap Inventaris Barang**: Create, Read, Update, Delete (dilengkapi fitur **Soft Delete**).
+*   **CRUD Transaksi**: Alur pembelian barang oleh customer, upload bukti pembayaran, hingga persetujuan status transaksi oleh Admin.
+*   **Unggah Foto Produk**: Penyimpanan file gambar produk menggunakan Laravel Storage.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 4. Cookies & Session
+*   **Session State**: Manajemen autentikasi berbasis session (Laravel Breeze) serta penyimpanan data sementara seperti flash message, session preferensi (tema/font), dan pencatatan sesi kunjungan admin.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### 5. Komunikasi Asinkronus (AJAX & API Integrasi)
+*   **Live Search Real-time**: Pencarian produk di halaman pengelolaan admin menggunakan Fetch API (AJAX) dengan fungsi *debounce* untuk efisiensi query database.
+*   **Quick Add (Tambah Cepat)**: Penambahan barang baru secara langsung melalui form popup (modal) tanpa reload halaman.
+*   **Eksternal API Kurs USD-IDR**: Integrasi secara langsung dengan `frankfurter.dev` untuk mengambil kurs USD ke IDR secara real-time dan menampilkannya di dashboard admin.
+*   **Reset Kunjungan via AJAX**: Manajemen data kunjungan admin yang di-reset tanpa memuat ulang seluruh halaman.
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 🛠️ Tech Stack & Kebutuhan Sistem
 
-```bash
-composer require laravel/boost --dev
+*   **PHP** >= 8.2
+*   **Framework**: Laravel 11.x
+*   **Database**: SQLite
+*   **Frontend**: Vanilla HTML5, Vanilla CSS3 (Kustom), JavaScript ES6+
 
-php artisan boost:install
-```
+---
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## 📦 Panduan Instalasi & Setup Lokal
 
-## Contributing
+1.  **Clone Repositori & Masuk ke Direktori Proyek**
+    ```bash
+    git clone <repository-url>
+    cd Robuxraditt
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2.  **Instal Dependensi PHP (Composer)**
+    ```bash
+    composer install
+    ```
 
-## Code of Conduct
+3.  **Instal & Compile Dependensi Node (Vite)**
+    ```bash
+    npm install
+    npm run build
+    ```
+    *(atau jalankan `npm run dev` untuk mode pengembangan).*
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4.  **Konfigurasi Environment File**
+    Salin file `.env.example` menjadi `.env`:
+    ```bash
+    cp .env.example .env
+    ```
+    Secara default, Laravel 11 menggunakan database SQLite. Pastikan konfigurasi database di file `.env` mengarah ke SQLite:
+    ```env
+    DB_CONNECTION=sqlite
+    # DB_DATABASE akan otomatis mengarah ke database/database.sqlite
+    ```
 
-## Security Vulnerabilities
+5.  **Jalankan Migrasi Database dan Seeder**
+    Jalankan perintah ini untuk membuat tabel-tabel database beserta data awal (seperti admin default dan daftar barang):
+    ```bash
+    php artisan migrate --seed
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+6.  **Membuat Link Symbolic Storage**
+    Hubungkan folder storage agar foto produk yang diunggah dapat diakses oleh publik:
+    ```bash
+    php artisan storage:link
+    ```
 
-## License
+7.  **Jalankan Local Development Server**
+    ```bash
+    php artisan serve
+    ```
+    Buka `http://127.0.0.1:8000` di web browser Anda.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 🔑 Akun Demo Pengujian
+
+Untuk mempermudah pengujian fitur-fitur ber-role khusus, Anda dapat menggunakan akun bawaan berikut:
+
+### 1. Akun Admin (Pengelola Inventaris)
+*   **Email**: `rayditarifan@gmail.com`
+*   **Password**: `Pristine123!`
+*   **Fitur Akses**: Dashboard admin dengan kurs USD real-time, menu Pengelolaan (CRUD Barang + Live Search + Quick Add), Verifikasi Transaksi, dan Preferensi Sistem.
+
+### 2. Akun Customer (Pembeli)
+*   **Registrasi Mandiri**: Dapat mendaftar langsung melalui menu **Daftar** di pojok kanan atas halaman katalog.
+*   **Fitur Akses**: Dashboard customer, melakukan Checkout/Pembelian, mengunggah bukti pembayaran, melihat riwayat transaksi, dan kalkulator Robux.
