@@ -91,22 +91,22 @@
     <form id="form-kontak" class="preference-form">
       <div class="form-group" style="margin-bottom: 15px;">
         <label for="email" style="display: block; font-weight: 600; margin-bottom: 6px;">Email Support</label>
-        <input type="email" id="email" name="email" value="{{ $contact['email'] }}" required style="padding: 10px; border-radius: 8px; border: 1.5px solid var(--border); width: 100%; max-width: 400px; background: var(--bg); color: var(--text);">
+        <input type="email" id="email" name="email" value="{{ $contact['email'] }}" required style="padding: 10px; border-radius: 8px; border: 1.5px solid #cbd5e1; width: 100%; max-width: 400px; background: #ffffff; color: #1e293b;">
       </div>
 
       <div class="form-group" style="margin-bottom: 15px;">
         <label for="phone" style="display: block; font-weight: 600; margin-bottom: 6px;">No. Telepon / WhatsApp (Contoh: +62 825-7511-930 atau 0825-7511-930)</label>
-        <input type="text" id="phone" name="phone" value="{{ $contact['phone'] }}" required style="padding: 10px; border-radius: 8px; border: 1.5px solid var(--border); width: 100%; max-width: 400px; background: var(--bg); color: var(--text);">
+        <input type="text" id="phone" name="phone" value="{{ $contact['phone'] }}" required style="padding: 10px; border-radius: 8px; border: 1.5px solid #cbd5e1; width: 100%; max-width: 400px; background: #ffffff; color: #1e293b;">
       </div>
 
       <div class="form-group" style="margin-bottom: 15px;">
         <label for="address" style="display: block; font-weight: 600; margin-bottom: 6px;">Alamat Operasional</label>
-        <input type="text" id="address" name="address" value="{{ $contact['address'] }}" required style="padding: 10px; border-radius: 8px; border: 1.5px solid var(--border); width: 100%; max-width: 400px; background: var(--bg); color: var(--text);">
+        <input type="text" id="address" name="address" value="{{ $contact['address'] }}" required style="padding: 10px; border-radius: 8px; border: 1.5px solid #cbd5e1; width: 100%; max-width: 400px; background: #ffffff; color: #1e293b;">
       </div>
 
       <div class="form-group" style="margin-bottom: 15px;">
         <label for="hours" style="display: block; font-weight: 600; margin-bottom: 6px;">Jam Layanan / Deskripsi</label>
-        <textarea id="hours" name="hours" required rows="3" style="padding: 10px; border-radius: 8px; border: 1.5px solid var(--border); width: 100%; max-width: 500px; background: var(--bg); color: var(--text); resize: vertical; font-family: inherit;">{{ $contact['hours'] }}</textarea>
+        <textarea id="hours" name="hours" required rows="3" style="padding: 10px; border-radius: 8px; border: 1.5px solid #cbd5e1; width: 100%; max-width: 500px; background: #ffffff; color: #1e293b; resize: vertical; font-family: inherit;">{{ $contact['hours'] }}</textarea>
       </div>
 
       <div class="preference-actions" style="margin-top: 20px;">
