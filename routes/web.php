@@ -8,9 +8,10 @@ use App\Http\Controllers\PreferensiController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+// Halaman utama — redirect ke katalog produk yang bisa diakses semua orang
 Route::get('/', function () {
     return redirect()->route('customer.katalog');
-});
+})->name('welcome');
 
 Route::view('/tentang', 'tentang')->name('tentang');
 Route::view('/kontak', 'kontak')->name('kontak');

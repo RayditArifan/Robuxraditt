@@ -10,10 +10,14 @@ use Illuminate\Http\RedirectResponse;
 
 class CustomerController extends Controller
 {
+    /**
+     * Menampilkan halaman dashboard customer dengan produk terbaru yang tersedia.
+     */
     public function dashboard(): View
     {
         $username = auth()->user()->name;
 
+        // Tampilkan 4 produk aktif terbaru yang masih ada stoknya
         $produkTerbaru = Barang::aktif()
             ->where('stok', '>', 0)
             ->latest()
@@ -26,8 +30,13 @@ class CustomerController extends Controller
         ));
     }
 
+    /**
+     * Menampilkan halaman katalog produk yang bisa diakses publik (tanpa login).
+     * Produk dikelompokkan berdasarkan kategori dan juga ditampilkan dengan paginasi.
+     */
     public function katalog(): View
     {
+        // Kelompokkan produk per kategori untuk tampilan tab/filter
         $produkKategori = Barang::aktif()
             ->where('stok', '>', 0)
             ->orderBy('kategori')
@@ -37,6 +46,7 @@ class CustomerController extends Controller
                 return $barang->kategori ?: 'Lainnya';
             });
 
+        // Daftar semua produk dengan paginasi
         $semuaBarangs = Barang::aktif()
             ->where('stok', '>', 0)
             ->latest()
@@ -46,6 +56,10 @@ class CustomerController extends Controller
         return view('customer.katalog', compact('produkKategori', 'semuaBarangs'));
     }
 
+    /**
+     * Menampilkan halaman detail satu produk.
+     * Produk yang tidak aktif atau stoknya habis akan mengembalikan 404.
+     */
     public function detail(Barang $barang): View
     {
         abort_unless($barang->aktif && $barang->stok > 0, 404);
@@ -54,29 +68,31 @@ class CustomerController extends Controller
     }
 
     /**
-     * Create a pending transaction.
+     * Membuat transaksi baru (checkout) untuk barang yang dipilih customer.
+     * Stok belum dikurangi; pengurangan terjadi saat admin menyetujui.
      */
     public function checkout(Request $request, Barang $barang): RedirectResponse
     {
         $request->validate([
-            'jumlah' => ['required', 'integer', 'min:1'],
+            'jumlah'          => ['required', 'integer', 'min:1'],
             'username_roblox' => ['required', 'string', 'max:255'],
         ]);
 
-        $jumlah = (int) $request->input('jumlah');
+        $jumlah         = (int) $request->input('jumlah');
         $usernameRoblox = $request->input('username_roblox');
 
+        // Cek ketersediaan stok sebelum membuat transaksi
         if ($barang->stok < $jumlah) {
             return redirect()->back()->with('error', 'Stok tidak mencukupi untuk jumlah pembelian ini.');
         }
 
         $transaksi = Transaksi::create([
-            'user_id' => auth()->id(),
-            'barang_id' => $barang->id,
-            'jumlah' => $jumlah,
-            'total_harga' => $jumlah * $barang->harga,
+            'user_id'         => auth()->id(),
+            'barang_id'       => $barang->id,
+            'jumlah'          => $jumlah,
+            'total_harga'     => $jumlah * $barang->harga,
             'username_roblox' => $usernameRoblox,
-            'status' => 'belum_bayar',
+            'status'          => 'belum_bayar', // Status awal: menunggu pembayaran
         ]);
 
         return redirect()->route('customer.transaksi.show', $transaksi)
@@ -84,7 +100,8 @@ class CustomerController extends Controller
     }
 
     /**
-     * Show a transaction invoice/receipt.
+     * Menampilkan detail transaksi milik customer yang sedang login.
+     * Customer tidak dapat melihat transaksi milik orang lain (403).
      */
     public function transaksiShow(Transaksi $transaksi): View
     {
@@ -94,7 +111,8 @@ class CustomerController extends Controller
     }
 
     /**
-     * Process/complete the transaction.
+     * Memproses upload bukti pembayaran dari customer.
+     * Status transaksi berubah dari 'belum_bayar' menjadi 'pending' (menunggu verifikasi admin).
      */
     public function transaksiProses(Request $request, Transaksi $transaksi): RedirectResponse
     {
@@ -106,9 +124,10 @@ class CustomerController extends Controller
         ]);
 
         if ($request->hasFile('bukti_pembayaran')) {
+            // Simpan file bukti ke disk public, lalu ubah status ke pending
             $path = $request->file('bukti_pembayaran')->store('transaksi', 'public');
             $transaksi->bukti_pembayaran = $path;
-            $transaksi->status = 'pending';
+            $transaksi->status           = 'pending';
             $transaksi->save();
 
             return redirect()->route('customer.transaksi.show', $transaksi)
@@ -119,7 +138,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * List customer's transaction history.
+     * Menampilkan riwayat transaksi milik customer yang sedang login.
      */
     public function transaksiList(): View
     {

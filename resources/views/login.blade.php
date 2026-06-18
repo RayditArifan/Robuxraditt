@@ -117,6 +117,12 @@
 
       </form>
 
+      <div class="login-forgot">
+        <a href="{{ route('password.request') }}" class="login-forgot-link">
+          🔒 Lupa Password?
+        </a>
+      </div>
+
       <div class="login-hint">
         <span>💡</span>
         Default: <strong>radit</strong> / <strong>robux123</strong>
@@ -128,17 +134,17 @@
 </div>
 
 <script>
-function togglePw() {
-  const input = document.getElementById('password');
-  const eye   = document.getElementById('pw-eye');
-  if (input.type === 'password') {
-    input.type = 'text';
-    eye.textContent = '🙈';
-  } else {
-    input.type = 'password';
-    eye.textContent = '👁️';
+  function togglePw() {
+    const input = document.getElementById('password');
+    const eye = document.getElementById('pw-eye');
+    if (input.type === 'password') {
+      input.type = 'text';
+      eye.textContent = '🙈';
+    } else {
+      input.type = 'password';
+      eye.textContent = '👁️';
+    }
   }
-}
 </script>
 
 @endsection
