@@ -16,7 +16,7 @@ class BarangSeeder extends Seeder
             ['kode' => 'BRG-004', 'nama' => 'Gamepass Dandys Stary Night', 'kategori' => 'Gamepass', 'stok' => 7, 'harga' => 50000, 'tanggal_masuk' => '2026-05-02', 'aktif' => true, 'foto' => 'barang/0UATSDQdkd0iVzH4fpSqslmjIM9Jk3Zo5ZO1fe7H.png'],
             ['kode' => 'BRG-005', 'nama' => 'Voucher Robux 500', 'kategori' => 'Voucher', 'stok' => 3, 'harga' => 110000, 'tanggal_masuk' => '2026-05-03', 'aktif' => true],
             ['kode' => 'BRG-006', 'nama' => 'Private Server Mingguan', 'kategori' => 'Private Server', 'stok' => 9, 'harga' => 8000, 'tanggal_masuk' => '2026-05-03', 'aktif' => true],
-            ['kode' => 'BRG-007', 'nama' => 'Gamepass Starter', 'kategori' => 'Gamepass', 'stok' => 2, 'harga' => 12000, 'tanggal_masuk' => '2026-05-04', 'aktif' => true],
+            ['kode' => 'BRG-007', 'nama' => 'Gamepass Chef Sprout', 'kategori' => 'Gamepass', 'stok' => 2, 'harga' => 12000, 'tanggal_masuk' => '2026-05-04', 'aktif' => true, 'foto' => 'barang/uxavIhjiR4SZ9VmaY5yHPwUYKR5XkUhOoJIP50vU.png'],
             ['kode' => 'BRG-008', 'nama' => 'Voucher Robux 1000', 'kategori' => 'Voucher', 'stok' => 6, 'harga' => 210000, 'tanggal_masuk' => '2026-05-04', 'aktif' => true],
         ];
 

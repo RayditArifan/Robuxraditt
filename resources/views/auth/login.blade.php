@@ -58,12 +58,14 @@
         </div>
       </div>
 
-      <div class="form-options">
-        <label class="remember-me">
+      <div class="form-options" style="display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem;">
+        <label class="remember-me" style="display: flex; align-items: center; gap: 6px; color: var(--text-muted); cursor: pointer; user-select: none;">
           <input type="checkbox" name="remember" id="remember_me">
-          <span class="checkbox-box"></span>
           Ingat saya
         </label>
+        @if (Route::has('password.request'))
+          <a href="{{ route('password.request') }}" class="forgot-password">Lupa password?</a>
+        @endif
       </div>
 
       <button type="submit" class="btn-submit">Masuk</button>
