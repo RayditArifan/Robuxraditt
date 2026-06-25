@@ -5,7 +5,6 @@
 @section('content')
 <section class="hero">
     <div>
-        <span class="hero-tag">Invoice #{{ $transaksi->id }}</span>
         <h2>Detail Transaksi</h2>
         <p>Silakan tinjau detail pembelian Anda dan lakukan konfirmasi pembayaran untuk memproses pesanan.</p>
     </div>
